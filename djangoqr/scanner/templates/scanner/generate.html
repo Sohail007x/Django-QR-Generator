@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% block title %}Generate QR Code{% endblock title %}
+
+{% block content %}
+<div class="center-container">
+    <div class="container">
+        <h2>Generate QR Code</h2>
+        
+        <!-- Form to generate QR code -->
+        <form action="{% url 'generate_qr' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="mobile_generate" placeholder="Enter your Mobile number" required pattern="\d{10}">
+            <input type="text" name="qr_data" placeholder="Enter text to QR code" required>
+            <button type="submit">Generate</button>
+        </form>
+
+        <!-- Error message display -->
+        {% if error %}
+            <div class="error-message" style="color: red;">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <!-- QR Code Preview -->
+        <div class="qr-preview">
+            {% if qr_image_url %}
+                <h2>Your QR Code:</h2>
+                <img src="{{ qr_image_url }}" alt="QR Code Generated">
+                <br>
+                <a href="{{ qr_image_url }}" download class="download-button">Save QR</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

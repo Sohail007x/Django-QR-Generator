@@ -1,0 +1,28 @@
+Django QR Code Project
+
+app = core
+app = scanner
+
+# Media settings in settings.py file
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Import in Urls.py file
+from django.conf import settings
+from django.conf.urls.static import static
+
+# Serve media file in the developement
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOR) #Append the QR
+
+pip install opencv-python
+
+#Image handle
+pip install pillow
+
+#QR Code handle
+pip install qrcode
+
+#Read one-dimensional barcodes and QR codes from Python 2 and 3 using the zbar library.
+pip install pyzbar
+
